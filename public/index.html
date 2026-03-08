@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Cozy Story Corner - Learn Languages Through Stories</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <div class="cup-icon">☕</div>
+                <span>The Cozy Story Corner</span>
+            </div>
+            <div class="nav-menu">
+                <a href="#home" class="nav-link" data-section="home">Home</a>
+                <a href="#languages" class="nav-link" data-section="languages">Languages</a>
+                <a href="#contact" class="nav-link" data-section="contact">Contact</a>
+                <div class="auth-buttons">
+                    <button class="btn-login" id="loginBtn">Login</button>
+                    <button class="btn-signup" id="signupBtn">Sign Up</button>
+                    <button class="btn-logout hidden" id="logoutBtn">Logout</button>
+                    <span class="user-info hidden" id="userInfo"></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Home Section -->
+        <section id="home" class="section active">
+            <div class="hero">
+                <div class="hero-icon">☕</div>
+                <h1 class="hero-title">The Cozy Story Corner</h1>
+                <p class="hero-subtitle">Warm stories for language learners,<br>served with a cup of comfort</p>
+                
+                <div class="welcome-card">
+                    <div class="card-icon">✨</div>
+                    <div class="card-content">
+                        <h3>Welcome, Reader!</h3>
+                        <p>Find your perfect reading level and enjoy heartwarming stories crafted for your learning journey. Each tale is written with care to help you grow.</p>
+                    </div>
+                </div>
+
+                <button class="btn-primary" onclick="switchSection('languages')">Explore Languages →</button>
+            </div>
+        </section>
+
+        <!-- Languages Section -->
+        <section id="languages" class="section">
+            <div class="languages-container">
+                <h2 class="section-title">Choose Your Language</h2>
+                <div class="languages-grid">
+                    <button class="language-btn" data-language="spanish">Spanish</button>
+                    <button class="language-btn" data-language="french">French</button>
+                    <button class="language-btn" data-language="japanese">Japanese</button>
+                    <button class="language-btn" data-language="german">German</button>
+                    <button class="language-btn" data-language="korean">Korean</button>
+                    <button class="language-btn" data-language="italian">Italian</button>
+                    <button class="language-btn" data-language="chinese">Chinese</button>
+                    <button class="language-btn" data-language="portuguese">Portugese</button>
+                    <button class="language-btn" data-language="hindi">Hindi</button>
+                </div>
+            </div>
+
+            <!-- Stories View -->
+            <div id="storiesView" class="stories-view hidden">
+                <div class="stories-header">
+                    <button class="btn-back" onclick="showLanguages()">← Back to Languages</button>
+                    <h2 id="selectedLanguage"></h2>
+                </div>
+                
+                <div class="stories-grid" id="storiesGrid">
+                    <!-- Stories will be loaded here -->
+                </div>
+
+                <!-- Submit Your Story Button -->
+                <div class="submit-story-section">
+                    <button class="btn-primary" id="submitStoryBtn" onclick="openSubmitStoryModal()">
+                        ✍️ Submit Your Own Story
+                    </button>
+                </div>
+            </div>
+
+            <p class="tagline">Made with 💝 for language learners everywhere</p>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section">
+            <div class="contact-container">
+                <h2 class="section-title">Get In Touch</h2>
+                <form class="contact-form" id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" name="subject" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="6" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary">Send Message</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Auth Modal -->
+    <div id="authModal" class="modal hidden">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeAuthModal()">×</button>
+            <div class="auth-container">
+                <div class="auth-tabs">
+                    <button class="auth-tab active" data-tab="login">Login</button>
+                    <button class="auth-tab" data-tab="signup">Sign Up</button>
+                </div>
+
+                <!-- Login Form -->
+                <form id="loginForm" class="auth-form active">
+                    <h3>Welcome Back</h3>
+                    <div class="form-group">
+                        <label for="loginEmail">Email</label>
+                        <input type="email" id="loginEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">Password</label>
+                        <input type="password" id="loginPassword" required>
+                    </div>
+                    <button type="submit" class="btn-primary">Login</button>
+                    <p class="form-message" id="loginMessage"></p>
+                </form>
+
+                <!-- Signup Form -->
+                <form id="signupForm" class="auth-form">
+                    <h3>Create Account</h3>
+                    <div class="form-group">
+                        <label for="signupUsername">Username</label>
+                        <input type="text" id="signupUsername" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signupEmail">Email</label>
+                        <input type="email" id="signupEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signupPassword">Password</label>
+                        <input type="password" id="signupPassword" required>
+                    </div>
+                    <button type="submit" class="btn-primary">Sign Up</button>
+                    <p class="form-message" id="signupMessage"></p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Story Modal -->
+    <div id="storyModal" class="modal hidden">
+        <div class="modal-content story-modal">
+            <button class="modal-close" onclick="closeStoryModal()">×</button>
+            <div class="story-content">
+                <h2 id="storyTitle"></h2>
+                <div class="story-meta">
+                    <span id="storyLevel"></span>
+                    <span id="storyDuration"></span>
+                </div>
+                <div id="storyBody" class="story-body"></div>
+                <div class="story-actions">
+                    <button class="btn-primary" id="enrollBtn" onclick="enrollCourse()">Start Reading</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Submit Story Modal -->
+    <div id="submitStoryModal" class="modal hidden">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeSubmitStoryModal()">×</button>
+            <div class="auth-container">
+                <h3>Submit Your Story</h3>
+                <p style="color: #666; margin-bottom: 1.5rem; font-size: 0.95rem;">
+                    📝 Share your story with our community! Your story will be reviewed and approved by our team before publishing.
+                </p>
+                <form id="submitStoryForm" class="auth-form active">
+                    <div class="form-group">
+                        <label for="storyTitle">Story Title</label>
+                        <input type="text" id="storyTitle" name="storyTitle" placeholder="e.g., The Lost City" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="storyLanguage">Language</label>
+                        <select id="storyLanguage" name="storyLanguage" required>
+                            <option value="">Select Language</option>
+                            <option value="spanish">Spanish</option>
+                            <option value="french">French</option>
+                            <option value="japanese">Japanese</option>
+                            <option value="german">German</option>
+                            <option value="korean">Korean</option>
+                            <option value="italian">Italian</option>
+                            <option value="chinese">Chinese</option>
+                            <option value="portuguese">Portuguese</option>
+                            <option value="hindi">Hindi</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="storyLevel">Proficiency Level</label>
+                        <select id="storyLevel" name="storyLevel" required>
+                            <option value="">Select Level</option>
+                            <option value="Beginner">Beginner</option>
+                            <option value="Intermediate">Intermediate</option>
+                            <option value="Advanced">Advanced</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="storyDescription">Short Description</label>
+                        <input type="text" id="storyDescription" name="storyDescription" placeholder="Brief summary of your story" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="storyContent">Full Story</label>
+                        <textarea id="storyContent" name="storyContent" rows="8" placeholder="Write your story here..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary">Submit for Approval</button>
+                    <p class="form-message" id="submitStoryMessage"></p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="/script.js"></script>
+</body>
+</html>
